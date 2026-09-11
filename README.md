@@ -1,4 +1,4 @@
-# 🎬 Movie App
+# 🎬 Letterboxd Clone
 
 A movie discovery application built with **React**. This was my first React project, where I focused on learning the fundamentals of React while building a functional application.
 
