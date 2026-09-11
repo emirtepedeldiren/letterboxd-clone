@@ -1,0 +1,105 @@
+.home {
+  padding: 2rem 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search-form {
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+
+  display: flex;
+  gap: 0.75rem;
+
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+
+/* SEARCH INPUT */
+.search-input {
+  flex: 1;
+
+  padding: 0.9rem 1.1rem;
+
+  background-color: #1f1f1f;
+  color: #fff;
+
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+
+  font-size: 1rem;
+
+  outline: none;
+
+  transition: all 0.25s ease;
+}
+
+
+/* Placeholder */
+.search-input::placeholder {
+  color: #888;
+}
+
+
+/* Input'a tıklayınca */
+.search-input:focus {
+  border-color: #e50914;
+  box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.15);
+}
+
+
+/* SEARCH BUTTON */
+.search-button {
+  padding: 0.9rem 1.5rem;
+
+  background-color: #e50914;
+  color: white;
+
+  border: none;
+  border-radius: 10px;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+
+  white-space: nowrap;
+}
+
+
+/* Mouse üzerine gelince */
+.search-button:hover {
+  background-color: #f6121d;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(229, 9, 20, 0.25);
+}
+
+
+/* Basarken */
+.search-button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+
+@media (max-width: 639px) {
+  .home {
+    padding: 1rem 0;
+  }
+
+  .search-form {
+    margin-bottom: 1rem;
+  }
+}
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
