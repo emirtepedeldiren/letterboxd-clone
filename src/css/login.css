@@ -1,0 +1,115 @@
+.login-container {
+    background-color: #24262b; /* Bembeyaz yerine şık bir antrasit/koyu gri */
+    width: 420px;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6); /* Koyu temaya uygun daha derin ve karanlık bir gölge */
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 80px auto; 
+}
+
+.login-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ust-baslik {
+    color: #9ca3af; /* Koyu arka planda okunacak açık gri */
+    font-size: 14px;
+}
+
+h1 {
+    color: #ffffff; /* Siyah başlık yerine beyaz başlık */
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input-field {
+    width: 100%;            
+    padding: 12px 14px;
+    background-color: #191b1f; /* Karttan bir tık daha koyu zemin (derinlik katar) */
+    color: #ffffff;              
+    border: 1px solid #333740; /* Koyu temaya uygun çok hafif çerçeve */
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;    
+}
+
+.input-field::placeholder {
+    color: #6b7280; /* Yer tutucu metni biraz daha soluk */
+}
+
+.input-field:focus {
+    border-color: #2e6ff2; /* Tıklanınca o güzel mavi çerçeve gelsin */
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #9ca3af; /* Alt yazılar da açık gri */
+}
+
+.forgot-link {
+    color: #2e6ff2;
+    text-decoration: none;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn {
+    width: 100%;            
+    padding: 11px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease; /* Butonlara hover için ufak bir animasyon */
+}
+
+.btn-primary {
+    background-color: #2e6ff2;
+    color: #ffffff;
+}
+
+.btn-google {
+    background-color: #333740; /* Koyu kart üzerinde tatlı duracak bir buton rengi */
+    color: #ffffff;
+}
+
+.normal-signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    color: #9ca3af;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.signup-yonlendirme {
+    color: #2e6ff2;
+    text-decoration: none;
+}
