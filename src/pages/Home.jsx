@@ -2,146 +2,162 @@ import MovieCard from "../components/MovieCard.jsx";
 import Pagination from "../components/Pagination.jsx";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { searchMovies, getPopularMovies } from "../services/api.js";
+import { searchMovies, getPopularMovies, getMoviesByGenre } from "../services/api.js";
 import "../css/Home.css";
 
 function Home() {
-    const [searchQuery, setSearchQuery] = useState("");
-    const [movies, setMovies] = useState([]);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
-    const location = useLocation();
+  const location = useLocation();
 
-    useEffect(() => {
-        const loadPopularMovies = async () => {
-            try {
-                setLoading(true);
+  useEffect(() => {
+    const fetchMovies = async () => {
+      // Eğer kullanıcı arama yapıyorsa kategori/popüler filtresini tetikleme
+      if (searchQuery.trim()) return;
 
-                const popularMovies = await getPopularMovies(currentPage);
-
-                setMovies(popularMovies.results);
-                setTotalPages(popularMovies.total_pages);
-                setError(null);
-
-            } catch (err) {
-                console.log(err);
-                setError("Failed to load movies...");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        loadPopularMovies();
-    }, [currentPage]);
-
-    useEffect(() => {
-      if (location.pathname === "/") {
-          setCurrentPage(1);
-      }
-    }, [location.key]);
-
-    const handleSearch = async (e) => {
-        e.preventDefault();
-
-        if (!searchQuery.trim()) return;
-        if (loading) return;
-
+      try {
         setLoading(true);
-        setCurrentPage(1);
+        let data;
 
-        try {
-            const searchResults = await searchMovies(searchQuery, 1);
-
-            setMovies(searchResults.results);
-            setTotalPages(searchResults.total_pages);
-            setError(null);
-
-        } catch (err) {
-            console.log(err);
-            setError("Failed to search movies...");
-        } finally {
-            setLoading(false);
+        if (selectedCategory === "all") {
+          data = await getPopularMovies(currentPage);
+        } else {
+          // Doğrudan API'den seçilen türe ait filmleri çekiyoruz
+          data = await getMoviesByGenre(selectedCategory, currentPage);
         }
+
+        setMovies(data.results || []);
+        // TMDB max 500 sayfa kabul eder
+        setTotalPages(Math.min(data.total_pages || 1, 500));
+        setError(null);
+      } catch (err) {
+        console.log(err);
+        setError("Failed to load movies...");
+      } finally {
+        setLoading(false);
+      }
     };
 
-    return (
-        <div className="home">
+    fetchMovies();
+  }, [currentPage, selectedCategory]);
 
-            <form onSubmit={handleSearch} className="search-form">
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setCurrentPage(1);
+    }
+  }, [location.key, location.pathname]);
 
-                <input
-                    type="text"
-                    placeholder="Search for movies..."
-                    className="search-input"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                />
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+    setSearchQuery(""); // Kategori seçilince aramayı temizle
+    setCurrentPage(1);  // Kategori değişince 1. sayfadan başlat
+  };
 
-                <button type="submit" className="search-button">
-                    Search
-                </button>
+  const handleSearch = async (e) => {
+    e.preventDefault();
 
-            </form>
+    if (!searchQuery.trim()) return;
+    if (loading) return;
 
-            {error && <div className="error-message">{error}</div>}
+    setLoading(true);
+    setCurrentPage(1);
+    setSelectedCategory("all"); // Arama yaparken kategori filtresini sıfırla
 
-            {loading ? (
-                <div className="loading">Loading...</div>
-        ) : (
+    try {
+      const searchResults = await searchMovies(searchQuery, 1);
 
+      setMovies(searchResults.results || []);
+      setTotalPages(Math.min(searchResults.total_pages || 1, 500));
+      setError(null);
+    } catch (err) {
+      console.log(err);
+      setError("Failed to search movies...");
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  return (
+    <div className="home">
+      <form onSubmit={handleSearch} className="search-form">
+        <input
+          type="text"
+          placeholder="Search for movies..."
+          className="search-input"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
 
-            <>
-              <div className="categorization">
-                <label for="movie-category">Genres:</label>
+        <button type="submit" className="search-button">
+          Search
+        </button>
+      </form>
 
-                <select name="movie-category" id="movie-category">
-                  <option value="action">Action</option>
-                  <option value="adventure">Adventure</option>
-                  <option value="animated">Animated</option>
-                  <option value="comedy">Crime</option>
-                  <option value="documentary">Documentary</option>
-                  <option value="drama">Drama</option>
-                  <option value="family">Family</option>
-                  <option value="fantasy">Fantasy</option>
-                  <option value="history">History</option>
-                  <option value="horror">Horror</option>
-                  <option value="music">Music</option>
-                  <option value="mystery">Mystery</option>
-                  <option value="romance">Romance</option>
-                  <option value="sci-fi">Science Fiction</option>
-                  <option value="tv-movie">TV Movie</option>
-                  <option value="thriller">Thriller</option>
-                  <option value="war">War</option>
-                  <option value="western">Western</option>
-                </select>
-              </div>
+      {error && <div className="error-message">{error}</div>}
 
-                    <div className="movies-grid">
-                        {movies.map((movie) => (
-                            <MovieCard
-                                movie={movie}
-                                key={movie.id}
-                            />
-                        ))}
-                    </div>
+      {loading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <>
+          <div className="categorization">
+            <label htmlFor="movie-category">Genres:</label>
 
-                    <div className="pagination">
-                        <Pagination
-                            currentPage={currentPage}
-                            totalPages={totalPages}
-                            onPageChange={setCurrentPage}
-                        />
+            <select
+              name="movie-category"
+              id="movie-category"
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+            >
+              <option value="all">All Genres</option>
+              <option value="28">Action</option>
+              <option value="12">Adventure</option>
+              <option value="16">Animation</option>
+              <option value="35">Comedy</option>
+              <option value="80">Crime</option>
+              <option value="99">Documentary</option>
+              <option value="18">Drama</option>
+              <option value="10751">Family</option>
+              <option value="14">Fantasy</option>
+              <option value="36">History</option>
+              <option value="27">Horror</option>
+              <option value="10402">Music</option>
+              <option value="9648">Mystery</option>
+              <option value="10749">Romance</option>
+              <option value="878">Science Fiction</option>
+              <option value="10770">TV Movie</option>
+              <option value="53">Thriller</option>
+              <option value="10752">War</option>
+              <option value="37">Western</option>
+            </select>
+          </div>
 
-                    </div>
-              </>
+          <div className="movies-grid">
+            {movies.length > 0 ? (
+              movies.map((movie) => (
+                <MovieCard movie={movie} key={movie.id} />
+              ))
+            ) : (
+              <p className="no-movies">No movies found.</p>
             )}
+          </div>
 
-        </div>
-    );
+          <div className="pagination">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
+          </div>
+        </>
+      )}
+    </div>
+  );
 }
 
 export default Home;
