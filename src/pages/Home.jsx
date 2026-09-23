@@ -90,8 +90,36 @@ function Home() {
 
             {loading ? (
                 <div className="loading">Loading...</div>
-            ) : (
-                <>
+        ) : (
+
+
+
+            <>
+              <div className="categorization">
+                <label for="movie-category">Genres:</label>
+
+                <select name="movie-category" id="movie-category">
+                  <option value="action">Action</option>
+                  <option value="adventure">Adventure</option>
+                  <option value="animated">Animated</option>
+                  <option value="comedy">Crime</option>
+                  <option value="documentary">Documentary</option>
+                  <option value="drama">Drama</option>
+                  <option value="family">Family</option>
+                  <option value="fantasy">Fantasy</option>
+                  <option value="history">History</option>
+                  <option value="horror">Horror</option>
+                  <option value="music">Music</option>
+                  <option value="mystery">Mystery</option>
+                  <option value="romance">Romance</option>
+                  <option value="sci-fi">Science Fiction</option>
+                  <option value="tv-movie">TV Movie</option>
+                  <option value="thriller">Thriller</option>
+                  <option value="war">War</option>
+                  <option value="western">Western</option>
+                </select>
+              </div>
+
                     <div className="movies-grid">
                         {movies.map((movie) => (
                             <MovieCard
@@ -107,9 +135,9 @@ function Home() {
                             totalPages={totalPages}
                             onPageChange={setCurrentPage}
                         />
-                        
+
                     </div>
-                </>
+              </>
             )}
 
         </div>
