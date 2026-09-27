@@ -28,3 +28,12 @@ export const getMoviesByGenre = async (genreId, page = 1) => {
   const data = await response.json();
   return data;
 };
+
+export const getMoviesBySort = async (sortId, page = 1, genreId = null) => {
+  const genreParam = genreId ? `&with_genres=${genreId}` : "";
+  const response = await fetch(
+    `${BASE_URL}/discover/movie?api_key=${API_KEY}&sort_by=${sortId}${genreParam}&page=${page}`
+  );
+  const data = await response.json();
+  return data;
+};
