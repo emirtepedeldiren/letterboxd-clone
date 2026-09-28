@@ -1,8 +1,49 @@
 .main-content {
   flex: 1;
-  padding: 2rem;
-  box-sizing: border-box;
   width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 0;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 639px) {
+  .main-content {
+    padding: 1.5rem 1rem 0;
+  }
+}
+
+/* Sayfa başlığı — Favorites ve Movie Picker'da ortak */
+.page-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-title {
+  font-family: var(--display);
+  font-stretch: 70%;
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.page-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 639px) {
+  .page-title {
+    font-size: 2rem;
+  }
 }
