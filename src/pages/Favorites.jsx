@@ -20,7 +20,7 @@ function Favorite() {
             {favorites.length === 0 ? (
                 <div className="favorites-empty">
                     <h3>Nothing here yet</h3>
-                    <p>Hover over a poster and hit ♥ to save it here.</p>
+
                     <Link to="/" className="favorites-empty-link">Browse movies</Link>
                 </div>
             ) : (

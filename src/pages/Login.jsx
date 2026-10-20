@@ -1,4 +1,5 @@
 import '../css/login.css'
+import { Link } from 'react-router-dom'
 
 function Login(){
     return (
@@ -21,7 +22,7 @@ function Login(){
                             Sign in with Google</button>
                     <div className="normal-signup">
                         <label className="signup">Don't you have an account? </label>
-                        <a href="#" className="signup-yonlendirme">Sign up</a>
+                        <Link to="/signup" className="signup-yonlendirme">Sign up</Link>
                     </div>
                 </form>
 

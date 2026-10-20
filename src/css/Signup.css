@@ -1,0 +1,175 @@
+/* login.css ile aynı stil; class'lar global olduğu için "signup-" önekiyle ayrıldı */
+
+.signup-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 3rem auto 4rem;
+    padding: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius);
+    justify-content: center;
+}
+
+.signup-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.signup-ust-baslik {
+    order: 2;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.signup-heading h1 {
+    font-stretch: 70%;
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--text);
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.signup-input {
+    width: 100%;
+    height: 44px;
+    padding: 0 0.9rem;
+    background-color: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.signup-input::placeholder {
+    color: var(--text-faint);
+}
+
+.signup-input:focus {
+    border-color: var(--text-muted);
+}
+
+.signup-input:focus-visible {
+    outline: none;
+}
+
+.signup-form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.15rem 0 0.35rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+.signup-terms {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.signup-terms input {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
+.signup-terms a {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s;
+}
+
+.signup-terms a:hover {
+    text-decoration-color: var(--text-muted);
+}
+
+.signup-btn {
+    width: 100%;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: 1px solid transparent;
+    transition: background-color 0.15s, border-color 0.15s;
+}
+
+.signup-btn-primary {
+    background-color: var(--accent);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.signup-btn-primary:hover {
+    background-color: var(--accent-hover);
+}
+
+.signup-btn-google {
+    color: var(--text);
+    border-color: var(--border-strong);
+    font-weight: 600;
+}
+
+.signup-btn-google:hover {
+    border-color: var(--text-muted);
+}
+
+.signup-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.login-yonlendirme {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.login-yonlendirme:hover {
+    color: var(--accent-hover);
+}
+
+@media (max-width: 639px) {
+    .signup-container {
+        margin: 1rem auto 3rem;
+        padding: 1.5rem;
+    }
+
+    .signup-heading h1 {
+        font-size: 2rem;
+    }
+}

@@ -2,6 +2,7 @@ import './css/App.css'
 import Favorite from './pages/Favorites'
 import Home from './pages/Home'
 import Login from './pages/Login'
+import SignUp from './pages/Signup'
 import MoviePicker from './pages/MoviePicker'
 import { Routes , Route } from 'react-router-dom'
 import { MovieProvider } from './contexts/MovieContext'
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/login" element={<Login />}/>
+        <Route path="/signup" element={<SignUp />}/>
         <Route path="/favorites" element={<Favorite />} />
         <Route path="/random" element={<MoviePicker/>} />
       </Routes>
