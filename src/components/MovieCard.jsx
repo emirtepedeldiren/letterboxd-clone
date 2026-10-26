@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../css/MovieCard.css'
 import { useMovieContext } from '../contexts/MovieContext'
 
@@ -6,17 +7,24 @@ function MovieCard({movie}){
 
     const {isFavorite, addToFavorites, removeFromFavorites} = useMovieContext();
     const favorite = isFavorite(movie.id)
+    const navigate = useNavigate()
     const [imageFailed, setImageFailed] = useState(false)
     const showPoster = movie.poster_path && !imageFailed
-    
+
     function onFavoriteClick(e) {
         e.preventDefault()
+        // Tıklama karta kabarmasın, yoksa cardClick de çalışır
+        e.stopPropagation()
 
         if(favorite) removeFromFavorites(movie.id)
         else addToFavorites(movie)
     }
-    
-    return <div className="movie-card">
+
+    function cardClick() {
+        navigate(`/movie/${movie.id}`)
+    }
+
+    return <div className="movie-card" onClick={cardClick}>
         <div className="movie-poster">
             {showPoster ? (
                 <img

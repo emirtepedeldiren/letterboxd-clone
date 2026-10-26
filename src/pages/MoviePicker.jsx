@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getRandomMovie, getMovieDetails } from "../services/api.js";
 import { useMovieContext } from "../contexts/MovieContext";
+import { formatRuntime } from "../utils/formatRuntime.js";
 import "../css/MoviePicker.css";
 
 const GENRES = [
@@ -26,13 +27,6 @@ const GENRES = [
 ];
 
 const RATINGS = [0, 5, 6, 7, 8];
-
-const formatRuntime = (minutes) => {
-  if (!minutes) return null;
-  const h = Math.floor(minutes / 60);
-  const m = minutes % 60;
-  return h > 0 ? `${h}h ${m}m` : `${m}m`;
-};
 
 function MoviePicker() {
   const [genre, setGenre] = useState("all");
